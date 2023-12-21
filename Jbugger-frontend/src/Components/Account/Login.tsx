@@ -42,29 +42,33 @@ function Login() {
     <>
       <div className="login-background container-fluid d-md-flex align-items-center justify-content-center vh-100 vw-100">
         <form className="flex-fill">
-              <div className="container text-center">
-                <div className="row mb-3 mt-3">
-                  <div className="offset-md-4 col-4">
-                    <input ref={usernameRef}
-                    type="text" className="form-control" placeholder="Username" aria-describedby="inputGroup-sizing-sm" />
-                  </div>
-                </div>
-                <div className="row mb-3">
-                  <div className="offset-md-4 col-4">
-                    <input ref={passwordRef}
-                    type="password" className="form-control" placeholder="Password" aria-describedby="inputGroup-sizing-sm" />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="offset-md-4 col-4">
-                    <button onClick={()=>handleLogin()} type="button" className="btn btn-dark">Login</button>
-                </div>
+          <div className="container text-center">
+            <div className="row mb-5 mt-8">
+              <div className="offset-md-3 col-6 text-white font-inter"> {/* Add text-white class here */}
+                <h3 className="h3-styling">Welcome to</h3>
+                <h1 className="h1-styling">JBugger</h1>
               </div>
             </div>
+            <div className="row mb-3 mt-3">
+              <div className="offset-md-3 col-6">
+                <input ref={usernameRef} type="text" className="form-control form-control-lg font-inter input-field" placeholder="Username" aria-describedby="inputGroup-sizing-sm" />
+              </div>
+            </div>
+            <div className="row mb-3">
+              <div className="offset-md-3 col-6">
+                <input ref={passwordRef} type="password" className="form-control form-control-lg font-inter input-field" placeholder="Password" aria-describedby="inputGroup-sizing-sm" />
+              </div>
+            </div>
+            <div className="row">
+              <div className="offset-md-4 col-4">
+                <button onClick={() => handleLogin()} type="button" className="btn btn-lg login-button font-inter">Login</button>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
     </>
-  )
+  );  
 }
 
 export default Login
