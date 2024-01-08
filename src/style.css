@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+}
+
+.login-background {
+  background: rgb(42, 32, 151);
+  background: linear-gradient(120deg, rgba(41, 32, 145, 0.990) 0%, rgb(57, 39, 70) 100%);
+}
+
+.login-button {
+  background-color: #1a1253 !important; 
+  color: hsla(0, 0%, 100%, 0.95) !important;
+  width: 160px !important;
+  height: 65px !important;
+  border-radius: 15px !important; 
+  font-family: 'Inter', sans-serif !important;
+  font-size: 32px !important;
+}
+
+.h1-styling {
+  font-size: 80px;
+  font-weight: bolder;
+  padding-bottom: 80px;
+}
+
+.h3-styling {
+  font-family: 'Inter', sans-serif;
+  font-weight:100;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.input-field {
+  border-radius: 50%;
+  height: 80px;
+}
