@@ -96,7 +96,7 @@ function Dashboard() {
           {/* Main Content */}
             <Navbar></Navbar>      
             <div className="col-md-10 offset-md-2 p-0 login-background container d-md-flex align-items-center justify-content-center vh-100">
-              <div className="column">
+              <div className="container">
                 <div className="mt-3">
                   <div className="row">
                     <div className="col-md-10 offset-md-1">
