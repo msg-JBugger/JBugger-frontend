@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+}
+
+.login-background {
+  background: rgb(42, 32, 151);
+  background: linear-gradient(120deg, rgba(41, 32, 145, 0.990) 0%, rgb(57, 39, 70) 100%);
+}
+
+.login-button {
+  background-color: #1a1253 !important; 
+  color: hsla(0, 0%, 100%, 0.95) !important;
+  width: 160px !important;
+  height: 65px !important;
+  border-radius: 15px !important; 
+  font-family: 'Inter', sans-serif !important;
+  font-size: 32px !important;
+}
+
+.h1-styling {
+  font-size: 80px;
+  font-weight: bolder;
+  padding-bottom: 80px;
+}
+
+.h3-styling {
+  font-family: 'Inter', sans-serif;
+  font-weight:100;
+}
+
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.input-field {
+  border-radius: 50%;
+  height: 80px;
+}
+
+.bug-title {
+  margin-top: 100px;
+  margin-left: 40%;
+  font-size: 80px;
+  padding-right: 700px;
+  margin-bottom: 50px;
+}
+
+.my-custom-label {
+  font-size: 30px;
+  padding: 10px;
+}
+
+.small-background {
+  background: #3E2C83;
+  padding-left: 50px;
+  width: 90%;
+  height: 83%;
+  margin-right: auto;
+  margin-left: auto;
+  align-self: center;
+  border-radius: 30px;
+  outline: 2px solid #00000027;
+}
+
+.my-button-group {
+  padding-top: 40px;
+}
+
+.my-custom-button {
+  margin-right: 20px;
+  border-radius: 30px !important;
+  background-color: #D9D9D9 !important;
+  color: #000000 !important;
+  outline-color: #D9D9D9 !important;
+}
+
+.my-custom-button-danger {
+  margin-right: 20px;
+  border-radius: 30px !important;
+}
+
+.rectangular-box {
+  border: 1px solid #ccc; /* Add a border to create the rectangular appearance */
+  padding: 20px; /* Add some padding for space inside the rectangle */
+  background-color: #f0f0f0; /* Set the background color to light gray */
+  border-radius: 30px;
+  height: 300px;
+  max-height: 200px; /* Set the maximum height for the rectangular box */
+  overflow-y: auto; /* Add a vertical scrollbar when content exceeds the max height */
+  margin-bottom: 30px;
+  margin-right: 50px;
+  margin-top: 10px;
+}
