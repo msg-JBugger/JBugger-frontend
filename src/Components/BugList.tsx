@@ -1,20 +1,20 @@
 import React from 'react';
 import { Bug } from '../Models/Bug';
+import { Link } from 'react-router-dom';
 
 interface BugListProps {
   bugs: Bug[] | undefined;
 }
 
 const BugList: React.FC<BugListProps> = ({ bugs }) => {
-  // Create an array to store JSX elements
   const tableRows: JSX.Element[] = [];
 
-  // Use forEach to iterate over bugs and push JSX elements to the array
   if(bugs != null) {
     Object.values(bugs).forEach((bug, index) => {
       tableRows.push(
         <tr key={index}>
           <td>{index + 1}</td>
+          
           <td>{bug.title}</td>
           <td>{bug.description}</td>
           <td>{bug.version}</td>
@@ -24,6 +24,9 @@ const BugList: React.FC<BugListProps> = ({ bugs }) => {
           <td>{bug.severity}</td>
           <td>{bug.reporterUsername}</td>
           <td>{bug.assigneeUsername}</td>
+          <td>
+            <Link to={`/bug-details/${bug.bugId}`}>{'See details'}</Link>
+          </td>
         </tr>
       );
     });
@@ -45,6 +48,7 @@ const BugList: React.FC<BugListProps> = ({ bugs }) => {
               <th>Severity</th>
               <th>Created By</th>
               <th>Assigned To</th>
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
