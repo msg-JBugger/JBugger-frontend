@@ -79,6 +79,11 @@ body {
   border-radius: 30px !important;
 }
 
+.my-custom-button-green {
+  margin-right: 20px;
+  border-radius: 30px !important;
+}
+
 .rectangular-box {
   border: 1px solid #ccc; /* Add a border to create the rectangular appearance */
   padding: 20px; /* Add some padding for space inside the rectangle */
