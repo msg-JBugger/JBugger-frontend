@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { LoginCheck } from '../LoginCheck';
 import axios from 'axios'
 import 'bootstrap/dist/css/bootstrap.css';
+import { axiosInterface } from "../../API/axiosInstance";
 
 function Login() {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ function Login() {
       username: usernameRef.current.value,
       password: passwordRef.current.value,
     };
-    axios.post(import.meta.env.VITE_SERVER_ADDRESS + import.meta.env.VITE_SERVER_PORT + 'api/auth/login', credentials)
+    await axiosInterface.post('/auth/login', credentials)
     .then(function (response) {
       console.log(response.data);
       const token = response.data.token;

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios'
 import { BugDetailsData } from '../../Models/BugDetailsData';
+import { axiosInterface } from '../../API/axiosInstance';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -19,8 +20,8 @@ function Dashboard() {
 
     const fetchBugDetails = async () => {
       try {
-        const response = await axios.get(
-          import.meta.env.VITE_SERVER_ADDRESS + import.meta.env.VITE_SERVER_PORT + `api/bug/${bugId}`,
+        const response = await axiosInterface.get(
+          `/bug/${bugId}`,
             {
                 headers: {
                 Authorization: "Bearer " + jwt,
@@ -40,31 +41,7 @@ function Dashboard() {
   
   return (
     <div className="login-background container-fluid d-md-flex vh-100 vw-100">
-      <nav className="navbar bg-white fixed-top">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              {/* You can add links or other navigation items here */}
-            </li>
-          </ul>
-        </div>
-        <div className="ml-auto">
-          <button className="btn btn-danger" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </nav>
+    
 
       {/* Bug Details Section */}
       <div className="vh-100 vw-100">

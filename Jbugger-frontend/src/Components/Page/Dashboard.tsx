@@ -5,6 +5,8 @@ import { BugData } from '../../Models/BugData';
 import { ChangeEvent } from 'react';
 import Navbar from '../Navbar';
 import BugList from '../BugList';
+import { axiosInterface } from '../../API/axiosInstance';
+import TopBar from '../TopBar';
 
 function Dashboard() {
   const [bugs, setBugs] = useState<BugData>();
@@ -46,8 +48,7 @@ function Dashboard() {
     const jwt = localStorage.getItem('jwt');
     
     try {
-      const response = await axios.get(
-        import.meta.env.VITE_SERVER_ADDRESS + import.meta.env.VITE_SERVER_PORT + 'api/bug/search',
+      const response = await axiosInterface.get('/bug/search',
         {
           headers: {
             Authorization: "Bearer " + jwt,
@@ -55,6 +56,7 @@ function Dashboard() {
           params: filter
         }
       );
+      console.log(response)
       setBugs(response.data);
       console.log(response.data)
     } catch (error) {
@@ -63,40 +65,14 @@ function Dashboard() {
   };
 
   return (
-    <div>
-      {/* Topbar */}
-      <nav className="navbar bg-white fixed-top">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              {/* You can add links or other navigation items here */}
-            </li>
-          </ul>
-        </div>
-        <div className="ml-auto">
-          <button className="btn btn-danger" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </nav>
+    <div >
+     
 
-      <div className="container-fluid">
+     <div className="container-fluid vh-100">
         <div className="row">
           {/* Main Content */}
-            <Navbar></Navbar>      
-            <div className="col-md-10 offset-md-2 p-0 login-background container d-md-flex align-items-center justify-content-center vh-100">
-              <div className="container">
+            <div className="col-md-10 offset-md-2 p-0 login-background container d-md-flex align-items-center vh-100" >
+            <div className="container h-100">
                 <div className="mt-3">
                   <div className="row">
                     <div className="col-md-10 offset-md-1">
