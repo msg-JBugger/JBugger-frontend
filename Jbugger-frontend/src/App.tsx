@@ -1,10 +1,10 @@
-import './style.css'
-import Login from './Components/Page/Login'
-import Dashboard from './Components/Page/Dashboard'
-import Layout from './Components/Layout'
-import BugDetails from './Components/Page/BugDetails'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import ProtectedRoute from './Components/ProtectedRoute'
+import './style.css';
+import Login from './Components/Page/Login';
+import Dashboard from './Components/Page/Dashboard';
+import Layout from './Components/Layout';
+import BugDetails from './Components/Page/BugDetails';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ProtectedRoute from './Components/ProtectedRoute';
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            {/* Add the new route for bug details */}
             <Route path="bug-details/:bugId" element={<ProtectedRoute><BugDetails /></ProtectedRoute>} />
+            <Route index element={<Navigate to="/login" />} />
           </Route>
           <Route path="/">
             <Route index path="login" element={<Login />} />
@@ -23,7 +23,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
