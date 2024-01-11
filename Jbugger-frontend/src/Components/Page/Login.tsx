@@ -51,12 +51,12 @@ function Login() {
             </div>
             <div className="row mb-3 mt-3">
               <div className="offset-md-3 col-6">
-                <input ref={usernameRef} type="text" className="form-control form-control-lg font-inter input-field" placeholder="Username" aria-describedby="inputGroup-sizing-sm" />
+                <input ref={usernameRef} type="text" className="form-control form-control-lg font-inter input-field my-custom-login-input" placeholder="Username" aria-describedby="inputGroup-sizing-sm" />
               </div>
             </div>
             <div className="row mb-3">
               <div className="offset-md-3 col-6">
-                <input ref={passwordRef} type="password" className="form-control form-control-lg font-inter input-field" placeholder="Password" aria-describedby="inputGroup-sizing-sm" />
+                <input ref={passwordRef} type="password" className="form-control form-control-lg font-inter input-field my-custom-login-input" placeholder="Password" aria-describedby="inputGroup-sizing-sm" />
               </div>
             </div>
             <div className="row">

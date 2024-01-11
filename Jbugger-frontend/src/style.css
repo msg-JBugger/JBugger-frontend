@@ -11,8 +11,7 @@ body {
   background-color: #1a1253 !important; 
   color: hsla(0, 0%, 100%, 0.95) !important;
   width: 160px !important;
-  height: 65px !important;
-  border-radius: 15px !important; 
+  border-radius: 30px !important; 
   font-family: 'Inter', sans-serif !important;
   font-size: 32px !important;
 }
@@ -21,6 +20,10 @@ body {
   font-size: 80px;
   font-weight: bolder;
   padding-bottom: 80px;
+}
+
+.my-custom-notif-icon {
+  padding-right: 200px;
 }
 
 .h3-styling {
@@ -72,6 +75,10 @@ body {
   background-color: #D9D9D9 !important;
   color: #000000 !important;
   outline-color: #D9D9D9 !important;
+}
+
+.my-custom-login-input {
+  border-radius: 30px !important;
 }
 
 .my-custom-button-danger {

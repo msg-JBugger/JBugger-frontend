@@ -14,11 +14,10 @@ const BugList: React.FC<BugListProps> = ({ bugs }) => {
       tableRows.push(
         <tr key={index}>
           <td>{index + 1}</td>
-          
           <td>{bug.title}</td>
           <td>{bug.description}</td>
-          <td>{bug.version}</td>
-          <td>{bug.fixedRevision}</td>
+          <td>{bug.detectedInVersion}</td>
+          <td>{bug.fixedInVersion}</td>
           <td>{bug.targetDate.toString()}</td>
           <td>{bug.status}</td>
           <td>{bug.severity}</td>

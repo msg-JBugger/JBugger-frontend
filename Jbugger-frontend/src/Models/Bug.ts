@@ -5,8 +5,8 @@ export interface Bug{
     bugId: number;
     title: string;
     description: string;
-    version: string;
-    fixedRevision: string;
+    detectedInVersion: string;
+    fixedInVersion: string;
     targetDate: string;
     status: StatusEnum;
     severity: SeverityEnum;

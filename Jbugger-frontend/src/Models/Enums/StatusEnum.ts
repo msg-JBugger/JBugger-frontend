@@ -1,8 +1,8 @@
 export enum StatusEnum{
-    New,
-    In_Progress,
-    Fixed,
-    Closed,
-    Rejected,
-    Info_Needed
+    OPEN,
+    IN_PROGRESS,
+    FIXED,
+    CLOSED,
+    REJECTED,
+    INFO_NEEDED
 }
