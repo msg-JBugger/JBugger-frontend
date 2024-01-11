@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { BugData } from '../../Models/BugData';
 import { ChangeEvent } from 'react';
+import { jwtDecode } from 'jwt-decode'
+import  { JwtPayload } from 'jwt-decode';
 import Navbar from '../Navbar';
 import BugList from '../BugList';
 
 function Dashboard() {
+  const jwt = localStorage.getItem('jwt');
+
   const [bugs, setBugs] = useState<BugData>();
   const navigate = useNavigate();
 
@@ -19,6 +23,19 @@ function Dashboard() {
     fetchBugsFromBackend();
   }, []);
 
+  const fetchJWTDetails = async () => {
+    return new Promise( async (resolve, reject) => {
+      try {
+        if (jwt) {
+          const decodedToken = jwtDecode(jwt) as JwtPayload;
+          resolve(decodedToken.sub);
+        }
+      } catch (error) {
+        console.error('Error fetching jwt username:', error);
+        reject(error);
+      }
+    });
+  };
 
   const [filter, setFilter] = useState({
     pageNumber: 0,
@@ -34,16 +51,16 @@ function Dashboard() {
     assigneeUsername: "",
   });
 
-  const [fields, setFields] = useState({
+  const [addFields, setFields] = useState({
     title: '',
     description: '',
-    version: '',
-    fixedRevision: '',
+    detectedInVersion: '',
+    fixedInVersion: '',
     targetDate: '',
     severity: '',
-    status: '',
-    reporterUsername: '',
     assigneeUsername: '',
+    attachmentFilename: null,
+    attachmentContent: null,
   });
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -60,36 +77,48 @@ function Dashboard() {
     setFields((prev) => ({ ...prev, [id]: value }));
   };
 
-  const addBug = async () => {
-    const jwt = localStorage.getItem('jwt');
+  // const addBug = async () => {
+  //   try {
+  //     const username = await fetchJWTDetails();
+  //     const response = await axios.post(
+  //       import.meta.env.VITE_SERVER_ADDRESS + import.meta.env.VITE_SERVER_PORT + `api/bug/add/${username}`,
+  //       {
+  //         headers: {
+  //           Authorization: "Bearer " + jwt,
+  //         },
+  //         params: addFields
+  //       }
+  //     );
+  //     console.log(response.data);
+  //     fetchBugsFromBackend();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-    try {
-      const response = await axios.post(
-        import.meta.env.VITE_SERVER_ADDRESS + import.meta.env.VITE_SERVER_PORT + 'api/bug/add',
-        {
-          headers: {
-            Authorization: "Bearer " + jwt,
-          },
-          body: {
-            title: fields.title,
-            description: fields.description,
-            version: fields.version,
-            fixedRevision: fields.fixedRevision,
-            targetDate: fields.targetDate,
-            severity: fields.severity,
-            assigneeUsername: fields.assigneeUsername,
-            attachmentFilename: null,
-            attachmentContent: null,
-          },
-          param: {
-            username: "bejana" // GET CURRENT USER
+  const addBug = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const username = await fetchJWTDetails();
+        const response = await axios.post(
+          import.meta.env.VITE_SERVER_ADDRESS + import.meta.env.VITE_SERVER_PORT + `api/bug/add?username=${username}`,
+          addFields,
+          {
+            headers: {
+              Authorization: "Bearer " + jwt,
+            },
+            params: addFields
           }
-        }
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+        );
+        console.log(response.data);
+        console.log('RESPONSE CODE: ' + response.status.toString());
+        fetchBugsFromBackend();
+        resolve(response.data);
+      } catch (error) {
+        console.error(error);
+        reject(error);
+      }
+    });
   };
 
   const handleAddBug = () => {
@@ -102,13 +131,13 @@ function Dashboard() {
     setFields({
       title: '',
       description: '',
-      version: '',
-      fixedRevision: '',
+      detectedInVersion: '',
+      fixedInVersion: '',
       targetDate: '',
       severity: '',
-      status: '',
-      reporterUsername: '',
       assigneeUsername: '',
+      attachmentFilename: null,
+      attachmentContent: null,
     });
   };
 
@@ -316,17 +345,50 @@ function Dashboard() {
                       <input
                         id="title"
                         type="text"
-                        value={fields.title || ''}
+                        value={addFields.title || ''}
                         onChange={handleFieldInputChange}
                       />
                     </div>
                     <div className="form-group my-custom-label">
-                      <label style={{ color: '#f0f0f0' }}>Fixed Revision:</label>
+                      <label style={{ color: '#f0f0f0' }}>Description:</label>
                       <br />
                       <input
-                        id="fixedRevision"
+                        id="description"
                         type="text"
-                        value={fields.fixedRevision || ''}
+                        value={addFields.description || ''}
+                        onChange={handleFieldInputChange}
+                      />
+                    </div>
+                    <div className="form-group my-custom-label">
+                      <label style={{ color: '#f0f0f0' }}>Detected in version:</label>
+                      <br />
+                      <input
+                        id="detectedInVersion"
+                        type="text"
+                        value={addFields.detectedInVersion || ''}
+                        onChange={handleFieldInputChange}
+                      />
+                    </div>
+                    <div className="form-group my-custom-label">
+                      <label style={{ color: '#f0f0f0' }}>Fixed in version:</label>
+                      <br />
+                      <input
+                        id="fixedInVersion"
+                        type="text"
+                        value={addFields.fixedInVersion || ''}
+                        onChange={handleFieldInputChange}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="col-md-4">
+                    <div className="form-group my-custom-label">
+                      <label style={{ color: '#f0f0f0' }}>Target Date:</label>
+                      <br />
+                      <input
+                        id="targetDate"
+                        type="text"
+                        value={addFields.targetDate || ''}
                         onChange={handleFieldInputChange}
                       />
                     </div>
@@ -336,30 +398,7 @@ function Dashboard() {
                       <input
                         id="severity"
                         type="text"
-                        value={fields.severity || ''}
-                        onChange={handleFieldInputChange}
-                      />
-                    </div>
-                    <div className="form-group my-custom-label">
-                      <label style={{ color: '#f0f0f0' }}>Target Date:</label>
-                      <br />
-                      <input
-                        id="targetDate"
-                        type="text"
-                        value={fields.targetDate || ''}
-                        onChange={handleFieldInputChange}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="col-md-4">
-                    <div className="form-group my-custom-label">
-                      <label style={{ color: '#f0f0f0' }}>Version:</label>
-                      <br />
-                      <input
-                        id="version"
-                        type="text"
-                        value={fields.version || ''}
+                        value={addFields.severity || ''}
                         onChange={handleFieldInputChange}
                       />
                     </div>
@@ -389,17 +428,7 @@ function Dashboard() {
                       <input
                         id="assigneeUsername"
                         type="text"
-                        value={fields.assigneeUsername || ''}
-                        onChange={handleFieldInputChange}
-                      />
-                    </div>
-                    <div className="form-group my-custom-label">
-                      <label style={{ color: '#f0f0f0' }}>Description:</label>
-                      <br />
-                      <input
-                        id="description"
-                        type="text"
-                        value={fields.description || ''}
+                        value={addFields.assigneeUsername || ''}
                         onChange={handleFieldInputChange}
                       />
                     </div>
